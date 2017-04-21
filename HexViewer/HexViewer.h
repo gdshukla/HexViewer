@@ -19,7 +19,6 @@ class CHexViewerApp : public CWinApp
 {
 public:
 	CHexViewerApp();
-
 // Overrides
 public:
 	virtual BOOL InitInstance();
@@ -27,6 +26,7 @@ public:
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
+    virtual int ExitInstance();
 };
 
 extern CHexViewerApp theApp;

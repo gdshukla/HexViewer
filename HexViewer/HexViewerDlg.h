@@ -18,10 +18,10 @@ class CHexViewerDlg : public CDialogEx
 // Construction
 public:
 	CHexViewerDlg(CWnd* pParent = NULL);	// standard constructor
-
+    ~CHexViewerDlg();
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_HexViewer_DIALOG };
+	enum { IDD = IDD_HEXVIEWER_DIALOG };
 #endif
 
 	protected:
@@ -36,17 +36,18 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-	DECLARE_MESSAGE_MAP()
+    afx_msg void OnEnChangeMfcFileName();
+    DECLARE_MESSAGE_MAP()
 
-    stPatData fdata;
-public:
+    stPatData   fdata;
+    CFont *     font;
     CString     m_FileName;
     CString     m_Hex;
     int         m_Size;
     int         m_FileSize;
-    afx_msg void OnEnChangeMfcFileName();
+    int         LoadFileToScan(char *fname, pstPatData pData);
+    CString     createHexBuffer(UCHAR *data, int size);
+public:
     afx_msg void OnBnClickedOk();
     void    freeAll();
-    int     LoadFileToScan(char *fname, pstPatData pData);
-    CString createHexBuffer(UCHAR *data, int size);
 };

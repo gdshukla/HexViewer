@@ -33,6 +33,7 @@ CHexViewerApp::CHexViewerApp()
 // The one and only CHexViewerApp object
 
 CHexViewerApp theApp;
+CHexViewerDlg *m_dlg;
 
 
 // CHexViewerApp initialization
@@ -70,11 +71,11 @@ BOOL CHexViewerApp::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+    m_dlg = new CHexViewerDlg;
+	m_pMainWnd = m_dlg;
+	INT_PTR nResponse = m_dlg->DoModal();
 
-	CHexViewerDlg dlg;
-	m_pMainWnd = &dlg;
-	INT_PTR nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
+    if (nResponse == IDOK)
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with OK
@@ -105,3 +106,12 @@ BOOL CHexViewerApp::InitInstance()
 	return FALSE;
 }
 
+
+
+int CHexViewerApp::ExitInstance()
+{
+    // TODO: Add your specialized code here and/or call the base class
+    m_dlg->freeAll();
+    delete m_dlg;
+    return CWinApp::ExitInstance();
+}
